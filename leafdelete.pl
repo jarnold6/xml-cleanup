@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 
-chdir('/Users/arnoldj/Desktop/') or die "$!";
+chdir('/Users/GustinG/Desktop/') or die "$!";
 
 open (FILE, "<text.xml") or die "Can't open text.xml: $!\n";
 my @lines = <FILE>;
@@ -46,6 +46,7 @@ s/.\&#160;.\&#160;.\?/.\&#160;.\&#160;.\&#160;?/g;
 s/.\&#160;.\&#160;.\!/.\&#160;.\&#160;.\&#160;!/g;
 s/\.\&#160;\.\&#160;\.\&#160;\./.\&#160;.\&#160;.\&#160;. /g;
 s/"'/"‘/g;
+s/<p>’/<p>‘/g;
 s/ '([-“a-zA-Z])/ ‘$1/g;
 s/'/’/g;
 s/"(.*?)"/“$1”/g;
