@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 
-chdir('/Users/GustinG/Desktop/') or die "$!";
+chdir('/Users/arnoldj/Desktop/') or die "$!";
 
 open (FILE, "<text.xml") or die "Can't open text.xml: $!\n";
 my @lines = <FILE>;
@@ -26,12 +26,13 @@ s/\[LW_Check\]//g;
 s/^([.^(]*?)\)([ ]*)$//g;
 s/^([ ]*)\)([ ]*)$//g;
 s/^([ ]+)(.*?)\)([ ]+)page:([0-9]*)(.*?)$/page:$4$5/g;
+s/\n<!--/<!--/g;
+s/( \n\n)*//g;
 
 
 
 #  Turn quotes
 
- 
 s/([a-z]) \.\.\.\./$1..../g;
 s/\.\.\.\.([a-z])/.... $1/g;
 s/\.\.\.\./.\&#160;.\&#160;.\&#160;./g;
@@ -49,7 +50,6 @@ s/"'/"‘/g;
 s/<p>’/<p>‘/g;
 s/ '([-“a-zA-Z])/ ‘$1/g;
 s/'/’/g;
-s/"(.*?)"/“$1”/g;
 s/id=(.)([a-z])(.*?)(.) filename/id="$1$2$3$4" filename/g;
 s/filename=(.)([a-z])(.*?)(.) scale/filename="$1$2$3$4"  scale/g;
 s/scale=(.)([a-z])(.*?)(.) /scale="$1$2$3$4" /g;
@@ -73,6 +73,22 @@ s/<p>"/<p>“/g;
 s/"<\/p>/”<\/p>/g;
 s/"<break\/>/”<break\/>/g;
 s/"([.^"]*?)<\/p>/”$1<\/p>/g;
+s/"([.^"]*?)<\/p>/”$1<\/p>/g;
+s/"([.^"]*?)<\/p>/”$1<\/p>/g;
+s/"([.^"]*?)<\/p>/”$1<\/p>/g;
+s/"(.*?)"/“$1”/g;
+s/([.,?!;:])“ /$1” /g;
+s/”(.*?)"/“$1”/g;
+s/“(.*?)"/“$1”/g;
+s/id=(.)([a-z])(.*?)(.) filename/id="$1$2$3$4" filename/g;
+s/filename=(.)([a-z])(.*?)(.) scale/filename="$1$2$3$4"  scale/g;
+s/scale=(.)([a-z])(.*?)(.) /scale="$1$2$3$4" /g;
+s/” scale=/" scale=/g;
+s/” filename=/" filename=/g;
+s/version=“1\.0” encoding=“UTF-8”/version="1.0" encoding="UTF-8"/g;
+s/SYSTEM “bookXML/SYSTEM "bookXML/g;
+s/book-driver\.dtd"/book-driver.dtd”/g;
+s/-->(.*?)"/-->$1”/g;
 
 push(@newlines,$_);
 }
