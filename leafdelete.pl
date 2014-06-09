@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 
-chdir('/Users/GustinG/Desktop/') or die "$!";
+chdir('/Users/CoasterK/Desktop/') or die "$!";
 
 open (FILE, "<text.xml") or die "Can't open text.xml: $!\n";
 my @lines = <FILE>;
@@ -13,7 +13,10 @@ foreach ( @lines ) {
 $_ =~ 
 
 
+
 #  Delete unnecessary leaf info
+
+
 s/<\/p>\|.//g;
 s/\/align\|//g;
 s/para:([a-z]*?)$//g;
@@ -26,10 +29,11 @@ s/\[LW_Check\]//g;
 s/^([.^(]*?)\)([ ]*)$//g;
 s/^([ ]*)\)([ ]*)$//g;
 s/^([ ]+)(.*?)\)([ ]+)page:([0-9]*)(.*?)$/page:$4$5/g;
+s/^(.*?) \) $//g;
 
 
 
-#  Turn quotes
+#  Turn single quotes
 
  
 s/([a-z]) \.\.\.\./$1..../g;
@@ -45,6 +49,12 @@ s/\.\.\./.\&#160;.\&#160;./g;
 s/.\&#160;.\&#160;.\?/.\&#160;.\&#160;.\&#160;?/g;
 s/.\&#160;.\&#160;.\!/.\&#160;.\&#160;.\&#160;!/g;
 s/\.\&#160;\.\&#160;\.\&#160;\./.\&#160;.\&#160;.\&#160;. /g;
+
+
+
+#  Turn double quotes
+
+ 
 s/"'/"‘/g;
 s/<p>’/<p>‘/g;
 s/ '([-“a-zA-Z])/ ‘$1/g;
@@ -73,6 +83,17 @@ s/<p>"/<p>“/g;
 s/"<\/p>/”<\/p>/g;
 s/"<break\/>/”<break\/>/g;
 s/"([.^"]*?)<\/p>/”$1<\/p>/g;
+
+
+
+s/([.,?!;:]+)" /$1” /g;
+s/([.,?!;:]+)“ /$1” /g;
+
+
+s/"([.^<>"”“]+)"/“$1”/g;
+s/ ”([- ,.!?:;'a-zA-Z0-9^"<>]*)" / “$1” /g;
+s/ "([- ,.!?:;'a-zA-Z0-9^"<>]*) <!--/ “$1 <!--/g;
+
 
 push(@newlines,$_);
 }
@@ -123,4 +144,3 @@ grep_pattern;
 
 print "POSSIBLE SINGLE QUOTATION ERRORS:";
 grep_pattern_single;
-
