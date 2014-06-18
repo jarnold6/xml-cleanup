@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 
-chdir('/Users/CoasterK/Desktop/') or die "$!";
+chdir('/Users/arnoldj/Desktop/') or die "$!";
 
 open (FILE, "<text.xml") or die "Can't open text.xml: $!\n";
 my @lines = <FILE>;
@@ -29,7 +29,9 @@ s/\[LW_Check\]//g;
 s/^([.^(]*?)\)([ ]*)$//g;
 s/^([ ]*)\)([ ]*)$//g;
 s/^([ ]+)(.*?)\)([ ]+)page:([0-9]*)(.*?)$/page:$4$5/g;
+s/^(.*?)page:/\npage:/g;
 s/^(.*?) \) $//g;
+s/^\((.*?)\) $//g;
 
 
 
