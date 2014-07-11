@@ -67,6 +67,7 @@ s/filename=(.)([a-z])(.*?)(.) scale/filename="$1$2$3$4"  scale/g;
 s/scale=(.)([a-z])(.*?)(.) /scale="$1$2$3$4" /g;
 s/” scale=/" scale=/g;
 s/” filename=/" filename=/g;
+s/” unit=/" unit=/g;
 s/version=“1\.0” encoding=“UTF-8”/version="1.0" encoding="UTF-8"/g;
 s/SYSTEM “bookXML/SYSTEM "bookXML/g;
 s/book-driver\.dtd"/book-driver.dtd”/g;
@@ -98,6 +99,15 @@ s/ "([- ,.!?:;'a-zA-Z0-9^"<>]*) <!--/ “$1 <!--/g;
 
 
 s/<p(.*?)>’([a-zA-Z])/<p$1>‘$2/g;
+
+
+# Delete images scaled to 0
+
+s/^<p><fig id(.*?)=(.)0(.)\/><\/p>([ ]*)//g;
+s/^<p align=\"left\"><fig id(.*?)=(.)0(.)\/><\/p>([ ]*)//g;
+s/^<p align=\"center\"><fig id(.*?)=(.)0(.)\/><\/p>([ ]*)//g;
+
+
 
 push(@newlines,$_);
 }
